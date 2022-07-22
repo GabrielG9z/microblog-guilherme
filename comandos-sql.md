@@ -1,4 +1,5 @@
 
+```sql
 CREATE TABLE usuarios(
     id SMALLINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(45) NOT NULL,
@@ -14,16 +15,15 @@ CREATE TABLE noticias(
     resumo TINYTEXT NOT NULL,
     imagem ENUM ('sim','nao') NOT NULL,
     usuario_id SMALLINT NULL,
-    categorias_id TINYINT NULL
+    categorias_id SMALLINT NULL
 );
 CREATE TABLE categorias(
     id SMALLINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(45) NOT NULL
 );
-
 ALTER TABLE noticias 
     ADD CONSTRAINT fk_noticias_usuarios_idx
-    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE SET NULL ON UPDATE NO ACTION;
+    FOREIGN KEY (usuarios_id) REFERENCES usuarios(id) ON DELETE SET NULL ON UPDATE NO ACTION;
 ALTER TABLE noticias 
     ADD CONSTRAINT fk_noticias_categorias1_idx
     FOREIGN KEY (categorias_id) REFERENCES categorias(id) ON DELETE SET NULL ON UPDATE NO ACTION;
