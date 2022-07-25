@@ -10,8 +10,8 @@ if(isset($_POST['inserir'])){
 	$usuario->setSenha($usuario->codificaSenha($_POST['senha']));
 	echo $usuario->getSenha();
 
-	/* $usuario->inserir();
-	header("location:usuarios.php"); */
+	$usuario->inserir();
+	header("location:usuarios.php");
 }
 
 ?>
