@@ -65,7 +65,7 @@ $listardeUsuarios = $usuario->listar();
 	</article>
 </div>
 
-
+<script src="../admin/js/confirm.js"></script>
 <?php 
 require_once "../inc/rodape-admin.php";
 ?>
