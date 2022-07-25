@@ -44,7 +44,10 @@ final class Usuario{
     }
 
 
-  
+    public function codificaSenha(string $senha):string{
+        return password_hash($senha, PASSWORD_DEFAULT);
+    }
+
     public function getId(): int
     {
         return $this->id;
