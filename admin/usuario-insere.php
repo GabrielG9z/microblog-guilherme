@@ -1,6 +1,8 @@
 <?php 
 require_once "../inc/cabecalho-admin.php";
-
+if(isset($_POST['inserir'])){
+	$usuario = new Usuario;
+}
 ?>
 
 
