@@ -73,7 +73,7 @@ final class Usuario{
         $sql = "DELETE FROM usuarios WHERE id = :id";
         try {
             $consulta = $this->conexao->prepare($sql);
-            $consulta->bindParam(":id", $id, PDO::PARAM_INT);
+            $consulta->bindParam(":id", $this->id, PDO::PARAM_INT);
             $consulta->execute();
         } catch (Exception $erro) {
             die("Erro: " .$erro->getMessage());
