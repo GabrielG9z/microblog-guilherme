@@ -1,6 +1,12 @@
 <?php
+
+use Microblog\ControleDeAcesso;
+
 require "../vendor/autoload.php";
+$sessao = new ControleDeAcesso;
+$sessao -> verificaAcesso();
 $pagina = basename($_SERVER['PHP_SELF']);
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br" class="h-100">
