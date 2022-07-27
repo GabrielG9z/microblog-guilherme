@@ -1,5 +1,9 @@
 <?php 
 require_once "inc/cabecalho.php";
+/* Mensagens de feedback relacionados ao acesso */
+if(isset($_GET['acesso_proibido'])){
+	$feedback = "Você deve logar primeiro!";
+}
 ?>
 
 
@@ -11,6 +15,7 @@ require_once "inc/cabecalho.php";
 
                 <?php if(isset($feedback)){?>
 				<p class="my-2 alert alert-warning text-center">
+					<?=$feedback?>
 				</p>
                 <?php } ?>
 
