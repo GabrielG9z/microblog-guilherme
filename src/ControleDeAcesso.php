@@ -21,4 +21,11 @@ final class ControleDeAcesso{
             exit;
         }
     }
+    public function login(int $id, string $nome, string $tipo):void{
+        /* Criar variaveis de sessão com os dados */
+        $_SESSION['id'] = $id;
+        $_SESSION['nome'] = $nome;
+        $_SESSION['tipo'] = $tipo;
+    }
+
 }

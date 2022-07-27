@@ -1,8 +1,15 @@
 <?php 
+use Microblog\Usuario;
+
+
 require_once "inc/cabecalho.php";
 /* Mensagens de feedback relacionados ao acesso */
 if(isset($_GET['acesso_proibido'])){
 	$feedback = "Você deve logar primeiro!";
+}elseif(isset($_GET['campos_obrigatorios'])){
+	$feedback = "Você deve preencher todos os campos";
+}elseif(isset($_GET['nao_encontrado'])){
+	$feedback = "Dados incorretos";
 }
 ?>
 
@@ -31,6 +38,30 @@ if(isset($_GET['acesso_proibido'])){
 				<button class="btn btn-primary btn-lg" name="entrar" type="submit">Entrar</button>
 
 			</form>
+<?php
+if(isset($_POST["entrar"])){
+	if(empty($_POST["email"])|| empty($_POST["senha"])){
+		header ('location:login.php?campos_obrigatorios');
+	}else{
+		$usuario = new Usuario;
+		$usuario->setEmail($_POST['email']);
+		$dados = $usuario->buscar();
+		/* Sé dados for falso (ou seja, não tem dados de nenhum usuário cadastrado) */
+		if(!$dados){
+			
+			header("location:login.php?nao_encontrado");
+		}else{
+			/* verificação da senha e login */
+			if(password_verify($_POST['senha'], $dados['senha'])){
+				echo "funcionou";
+			}else{
+				echo "não funcionou";
+
+			}
+		}
+	}
+}
+?>			
     </div>
     
     
