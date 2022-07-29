@@ -1,6 +1,8 @@
-<?php 
-use Microblog\Usuario;
+<?php
 
+use Microblog\ControleDeAcesso;
+use Microblog\Usuario;
+use Microblog\Utilitarios;
 
 require_once "inc/cabecalho.php";
 /* Mensagens de feedback relacionados ao acesso */
@@ -9,7 +11,11 @@ if(isset($_GET['acesso_proibido'])){
 }elseif(isset($_GET['campos_obrigatorios'])){
 	$feedback = "Você deve preencher todos os campos";
 }elseif(isset($_GET['nao_encontrado'])){
-	$feedback = "Dados incorretos";
+	$feedback = "Dados incorretos!";
+}elseif(isset($_GET['senha_incorreta'])){
+	$feedback = "Login ou Senha incorretos!";
+}elseif(isset($_GET['logout'])){
+	$feedback = "Você saiu do sistema!";
 }
 ?>
 
@@ -53,10 +59,12 @@ if(isset($_POST["entrar"])){
 		}else{
 			/* verificação da senha e login */
 			if(password_verify($_POST['senha'], $dados['senha'])){
-				echo "funcionou";
+				$sessao = new ControleDeAcesso;
+				$sessao->login( $dados['id'], $dados['nome'], $dados['tipo']);
+				
+				header("location:admin/index.php");
 			}else{
-				echo "não funcionou";
-
+				header("location:login.php?senha_incorreta");
 			}
 		}
 	}

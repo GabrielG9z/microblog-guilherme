@@ -3,7 +3,7 @@ namespace Microblog;
 
 final class ControleDeAcesso{
 
-    public function __constuct()
+    public function __construct()
     {
         /* Verificando se NÃO EXISTE uma sessão em funcionamento */
 
@@ -18,7 +18,7 @@ final class ControleDeAcesso{
             /* Significa que o usuario não esta logado por tanto apague qualquer resquício de sessão e force o usuario a ir para login.php */
             session_destroy();
             header("location:../login.php?acesso_proibido");
-            exit;
+            die();
         }
     }
     public function login(int $id, string $nome, string $tipo):void{
@@ -26,6 +26,12 @@ final class ControleDeAcesso{
         $_SESSION['id'] = $id;
         $_SESSION['nome'] = $nome;
         $_SESSION['tipo'] = $tipo;
+    }
+    public function logout():void{
+        session_start();
+        session_destroy();
+        header("location:../login.php?logout");
+        die();
     }
 
 }
