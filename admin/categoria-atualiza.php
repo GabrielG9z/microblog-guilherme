@@ -5,9 +5,8 @@ use Microblog\ControleDeAcesso;
 
 require_once "../inc/cabecalho-admin.php";
 $verifica = new ControleDeAcesso;
-$$verifica->verificaAcessoAdmin();
+$verifica->verificaAcessoAdmin();
 
-if(isset($_SESSION['tipo'] ))
 ?>
 
 
