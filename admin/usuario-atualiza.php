@@ -1,9 +1,12 @@
 <?php
 
+use Microblog\ControleDeAcesso;
 use Microblog\Usuario;
-use Microblog\Utilitarios;
 
 require_once "../inc/cabecalho-admin.php";
+
+$verifica = new ControleDeAcesso;
+$verifica->verificaAcessoAdmin();
 
 $usuario = new Usuario;
 $usuario->setId($_GET['id']);

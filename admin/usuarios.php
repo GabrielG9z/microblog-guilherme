@@ -1,13 +1,15 @@
-<?php 
+<?php
+
+use Microblog\ControleDeAcesso;
 use Microblog\Usuario;
-use Microblog\Utilitarios;
 
 require_once "../inc/cabecalho-admin.php";
 
 $usuario = new Usuario;
 $listardeUsuarios = $usuario->listar();
+$verifica = new ControleDeAcesso;
+$verifica->verificaAcessoAdmin();
 
-/* Utilitarios::dump($listardeUsuarios); */
 
 
 ?>

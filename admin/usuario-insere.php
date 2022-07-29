@@ -1,6 +1,12 @@
-<?php 
+<?php
+
+use Microblog\ControleDeAcesso;
 use Microblog\Usuario;
 require_once "../inc/cabecalho-admin.php";
+
+$verifica = new ControleDeAcesso;
+$verifica->verificaAcessoAdmin();
+
 if(isset($_POST['inserir'])){
 	$usuario = new Usuario;
 	$usuario->setNome($_POST['nome']);
