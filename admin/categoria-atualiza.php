@@ -1,11 +1,23 @@
 <?php
 
+use Microblog\Categoria;
 use Microblog\ControleDeAcesso;
 
 
 require_once "../inc/cabecalho-admin.php";
 $verifica = new ControleDeAcesso;
 $verifica->verificaAcessoAdmin();
+
+$categoria = new Categoria;
+$categoria->setId($_GET['id']);
+$dados = $categoria->ListarUmaCategoria();
+
+if (isset($_POST['atualizar'])){
+	$categoria->setNome($_POST['nome']);
+
+	$categoria->atualizarCategoria();
+	header("location:categorias.php");
+}
 
 ?>
 
@@ -17,11 +29,11 @@ $verifica->verificaAcessoAdmin();
 		Atualizar dados da categoria
 		</h2>
 				
-		<form class="mx-auto w-75" action="" method="post" id="form-atualizar" name="form-atualizar">
+		<form class="mx-auto w-75" action="" method="post" id="form-atualizar" name="form-atualizar" >
 
 			<div class="mb-3">
 				<label class="form-label" for="nome">Nome:</label>
-				<input class="form-control" type="text" id="nome" name="nome" required>
+				<input class="form-control" type="text" id="nome" name="nome" value="<?=$dados['nome']?>" required>
 			</div>
 			
 			<button class="btn btn-primary" name="atualizar"><i class="bi bi-arrow-clockwise"></i> Atualizar</button>

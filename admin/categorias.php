@@ -1,9 +1,13 @@
 <?php 
 use Microblog\ControleDeAcesso;
+use Microblog\Categoria;
 require_once "../inc/cabecalho-admin.php";
 $verifica = new ControleDeAcesso;
 $verifica->verificaAcessoAdmin();
 
+$categoria = new Categoria;
+
+$listarCategorias = $categoria->ListarCategorias();
 
 ?>
 
@@ -12,7 +16,7 @@ $verifica->verificaAcessoAdmin();
 	<article class="col-12 bg-white rounded shadow my-1 py-4">
 		
 		<h2 class="text-center">
-		Categorias <span class="badge bg-dark">X</span>
+		Categorias <span class="badge bg-dark"><?= count($listarCategorias)?></span>
 		</h2>
 
 		<p class="text-center mt-5">
@@ -32,21 +36,22 @@ $verifica->verificaAcessoAdmin();
 				</thead>
 
 				<tbody>
-
-					<tr>
-						<td> Nome... </td>
-						<td class="text-center">
-							<a class="btn btn-warning" 
-							href="categoria-atualiza.php">
-							<i class="bi bi-pencil"></i> Atualizar
-							</a>
-						
-							<a class="btn btn-danger excluir" 
-							href="categoria-exclui.php">
-							<i class="bi bi-trash"></i> Excluir
-							</a>
-						</td>
-					</tr>
+			<?php foreach($listarCategorias as $categoria){?>
+			<tr>
+				<td> <?=$categoria['nome']?></td>
+				<td class="text-center">
+					<a class="btn btn-warning" 
+					href="categoria-atualiza.php?id=<?=$categoria['id']?>">
+					<i class="bi bi-pencil"></i> Atualizar
+				</a>
+				
+				<a class="btn btn-danger excluir" 
+				href="categoria-exclui.php?id=<?=$categoria['id']?>">
+				<i class="bi bi-trash"></i> Excluir
+			</a>
+		</td>
+	</tr>
+			<?php }?>
 
 				</tbody>                
 			</table>
