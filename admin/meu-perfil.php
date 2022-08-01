@@ -1,5 +1,32 @@
-<?php 
+<?php
+
+use Microblog\Usuario;
+
 require_once "../inc/cabecalho-admin.php";
+$usuario = new Usuario;
+$usuario->setId($_SESSION['id']);
+$dados = $usuario->listarUm();
+
+
+if (isset($_POST['atualizar'])){
+	$usuario->setNome($_POST['nome']);
+	$_SESSION['nome'] = $usuario->getNome();
+	$usuario->setEmail($_POST['email']);
+	$_SESSION['email'] = $usuario->getEmail();
+	$usuario->setTipo($_SESSION['tipo']);
+
+
+	if(empty($_POST['senha'])){
+		$usuario->setSenha($dados['senha']);
+	}else{
+
+		$usuario->setSenha($usuario->verificaSenha($_POST['senha'], $dados['senha']));
+	}
+
+	$usuario->atualizar();
+	header("location:index.php?perfil-atualizado"); 
+}
+
 ?>
 
 
@@ -14,12 +41,12 @@ require_once "../inc/cabecalho-admin.php";
 
 			<div class="mb-3">
 				<label class="form-label" for="nome">Nome:</label>
-				<input class="form-control" type="text" id="nome" name="nome" required>
+				<input class="form-control" type="text" id="nome" name="nome" value="<?=$dados['nome']?>" required>
 			</div>
 
 			<div class="mb-3">
 				<label class="form-label" for="email">E-mail:</label>
-				<input class="form-control" type="email" id="email" name="email" required>
+				<input class="form-control" type="email" id="email" name="email" value="<?=$dados['email']?>" required>
 			</div>
 
 			<div class="mb-3">
