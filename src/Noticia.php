@@ -10,7 +10,7 @@ final class Noticia{
     private string $resumo;
     private string $imagem;
     private string $destaque;
-    private int $categoriaId;
+    private int $categoria_id;
 
     /* 
     Criando uma propriedade do tipo usuario, ou seja, a partir de uma classe que criamos com o objetivo de reutilizar recursos dela
@@ -27,24 +27,65 @@ final class Noticia{
         $this->conexao = $this->usuario->getConexao();
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function getConexao():PDO
+    public function inserir():void
     {
-        return $this->conexao;
+        $sql = "INSERT INTO noticias(titulo, texto, resumo, imagem , destaque, usuario_id, categoria_id) VALUES(:titulo, :texto, :resumo, :imagem , :destaque, :usuario_id, :categoria_id)";
+
+        try{
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->bindParam(":titulo", $this->titulo, PDO::PARAM_STR);
+            $consulta->bindParam(":texto", $this->texto, PDO::PARAM_STR);
+            $consulta->bindParam(":resumo", $this->resumo, PDO::PARAM_STR);
+            $consulta->bindParam(":imagem", $this->imagem, PDO::PARAM_STR);
+            $consulta->bindParam(":destaque", $this->destaque, PDO::PARAM_STR);
+            $consulta->bindParam(":categoria_id", $this->categoria_id, PDO::PARAM_INT);
+            $consulta->bindValue(":usuario_id",$this->usuario->getId(), PDO::PARAM_INT);
+            $consulta->execute();
+            
+        }catch(Exception $erro){
+            die("Erro:". $erro->getMessage());
+        }
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* GETTERS E SETTERS */
+    
     public function getId(): int
     {
         return $this->id;
@@ -121,4 +162,12 @@ final class Noticia{
 
     }
 
+    public function getCategoriaId(): int
+    {
+        return $this->categoria_id;
+    }
+    public function setCategoriaId(int $categoria_id)
+    {
+        $this->categoria_id = $categoria_id;
+    }
 }

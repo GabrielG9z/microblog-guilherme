@@ -106,6 +106,10 @@ final class Usuario{
 
 
 /* Getters e Setters */
+    public function getConexao(): PDO
+    {
+        return $this->conexao;
+    }
     public function getId(): int
     {
         return $this->id;
