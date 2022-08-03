@@ -37,17 +37,19 @@ $listarCategorias = $categoria->ListarCategorias();
 				</thead>
 
 				<tbody>
-			<?php foreach($listarCategorias as $categoria){?>
+			<?php foreach($listarCategorias as $categoria){
+				extract($categoria);
+				?>
 			<tr>
-				<td> <?=$categoria['nome']?></td>
+				<td> <?=$nome?></td>
 				<td class="text-center">
 					<a class="btn btn-warning" 
-					href="categoria-atualiza.php?id=<?=$categoria['id']?>">
+					href="categoria-atualiza.php?id=<?=$id?>">
 					<i class="bi bi-pencil"></i> Atualizar
 				</a>
 				
 				<a class="btn btn-danger excluir" 
-				href="categoria-exclui.php?id=<?=$categoria['id']?>">
+				href="categoria-exclui.php?id=<?=$id?>">
 				<i class="bi bi-trash"></i> Excluir
 			</a>
 		</td>
