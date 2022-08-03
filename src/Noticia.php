@@ -6,11 +6,12 @@ final class Noticia{
     private int $id;
     private string $nome;
     private string $data;
+    private string $titulo;
     private string $texto;
     private string $resumo;
     private string $imagem;
     private string $destaque;
-    private int $categoria_id;
+    private int $categoriaId;
 
     /* 
     Criando uma propriedade do tipo usuario, ou seja, a partir de uma classe que criamos com o objetivo de reutilizar recursos dela
@@ -38,7 +39,7 @@ final class Noticia{
             $consulta->bindParam(":resumo", $this->resumo, PDO::PARAM_STR);
             $consulta->bindParam(":imagem", $this->imagem, PDO::PARAM_STR);
             $consulta->bindParam(":destaque", $this->destaque, PDO::PARAM_STR);
-            $consulta->bindParam(":categoria_id", $this->categoria_id, PDO::PARAM_INT);
+            $consulta->bindParam(":categoria_id", $this->categoriaId, PDO::PARAM_INT);
             $consulta->bindValue(":usuario_id",$this->usuario->getId(), PDO::PARAM_INT);
             $consulta->execute();
             
@@ -107,18 +108,9 @@ final class Noticia{
         $this->nome = filter_var($nome, FILTER_SANITIZE_SPECIAL_CHARS);
 
     }
-    public function getData(): string
-    {
-        return $this->data;
-    }
 
-    public function setData(string $data)
-    {
-        $this->data = filter_var($data, FILTER_SANITIZE_SPECIAL_CHARS);
 
-    }
-
-    public function getTexto(): string
+    public function getTexto(): string 
     {
         return $this->texto;
     }
@@ -164,10 +156,19 @@ final class Noticia{
 
     public function getCategoriaId(): int
     {
-        return $this->categoria_id;
+        return $this->categoriaId;
     }
-    public function setCategoriaId(int $categoria_id)
+    public function setCategoriaId(int $categoriaId)
     {
-        $this->categoria_id = $categoria_id;
+        $this->categoriaId = $categoriaId;
+    }
+    
+    public function getTitulo(): string
+    {
+        return $this->titulo;
+    }
+    public function setTitulo(string $titulo)
+    {
+        $this->titulo = $titulo;
     }
 }

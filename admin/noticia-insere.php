@@ -2,13 +2,27 @@
 
 use Microblog\Categoria;
 use Microblog\Noticia;
+use Microblog\Utilitarios;
 
 require_once "../inc/cabecalho-admin.php";
 
-$noticia = new Noticia;
 
 $categorias = new Categoria;
 $listarCategorias = $categorias->ListarCategorias();
+if(isset($_POST['inserir'])){
+	$noticia = new Noticia;
+	$noticia->setTitulo($_POST['titulo']);
+	$noticia->setTexto($_POST['texto']);
+	$noticia->setResumo($_POST['resumo']);
+	$noticia->setDestaque($_POST['destaque']);
+	$noticia->setCategoriaId($_POST['categoria']);
+	$noticia->setImagem('qualquer coisa');
+	$noticia->usuario->setId($_SESSION['id']);
+
+	Utilitarios::dump($noticia);
+	/* $noticia->inserir(); */
+/* 	header('location:noticias.php'); */
+}
 
 ?>
 
