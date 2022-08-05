@@ -55,13 +55,25 @@ final class Noticia{
             "image/gif",
             "image/svg+xml"
         ];
-        if(!in_array($arquivo['type'], $tiposValidos)){
+        if(!in_array($arquivo['type'], $tiposValidos))
+        {
             die("<script>
             alert('Formato inválido!');
             history.back();
             </script>"
             );
         }
+        /* acessar apenas o nome do arquivo */
+        $nome = $arquivo['name'];
+
+        /* acessando os dados de acesso temporário */
+        $temporario = $arquivo['tmp_name'];
+
+        /* Definindo a pasta de distino junto com o nome do arquivo */
+        $destino = "../imagem/".$nome;
+
+        /* Usamos a função abaico para pegar a área temporária e enviar para a pasta de destino (com o nome do arquivo) */
+        move_uploaded_file($temporario, $destino);
     }
 
 
