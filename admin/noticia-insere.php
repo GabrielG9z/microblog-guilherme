@@ -11,6 +11,7 @@ $categorias = new Categoria;
 $listarCategorias = $categorias->ListarCategorias();
 if(isset($_POST['inserir'])){
 	$noticia = new Noticia;
+	$noticia->usuario->setId($_SESSION['id']);
 	$noticia->setTitulo($_POST['titulo']);
 	$noticia->setTexto($_POST['texto']);
 	$noticia->setResumo($_POST['resumo']);
@@ -22,12 +23,11 @@ if(isset($_POST['inserir'])){
 	/* Função upload (responsável por pegar o arquivo e enviar para o HD do servidor) */
 	$noticia->upload($imagem);
 	$noticia->setImagem($imagem['name']);
-	$noticia->usuario->setId($_SESSION['id']);
+	
+	$noticia->inserir();
+	header('location:noticias.php');
 
 
-	Utilitarios::dump($imagem);
-	/* $noticia->inserir(); */
-/* 	header('location:noticias.php'); */
 }
 
 ?>

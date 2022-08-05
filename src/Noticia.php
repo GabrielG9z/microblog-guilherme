@@ -75,6 +75,23 @@ final class Noticia{
         /* Usamos a função abaico para pegar a área temporária e enviar para a pasta de destino (com o nome do arquivo) */
         move_uploaded_file($temporario, $destino);
     }
+    public function listar():array{
+       if($this->usuario->getTipo() === 'admin' ){
+        $sql = "SELECT id, data, titulo, texto, resumo, imagem , destaque, usuario_id, categoria_id FROM noticias ";
+        }else{
+        $sql = "SELECT id, data, titulo, texto, resumo, imagem , destaque, usuario_id, categoria_id FROM noticias ";
+        }
+
+
+        try{
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->execute();
+            $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        }catch(Exception $erro){
+            die("Erro:". $erro->getMessage());
+        }
+        return $resultado;
+    }
 
 
 
