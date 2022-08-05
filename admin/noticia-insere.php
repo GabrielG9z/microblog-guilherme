@@ -16,10 +16,16 @@ if(isset($_POST['inserir'])){
 	$noticia->setResumo($_POST['resumo']);
 	$noticia->setDestaque($_POST['destaque']);
 	$noticia->setCategoriaId($_POST['categoria']);
-	$noticia->setImagem('qualquer coisa');
+	
+	/* Enviamos para o setter somente a parte que se refere ao nome/extensão do arquivo */
+	$imagem = $_FILES["imagem"];
+	/* Função upload (responsável por pegar o arquivo e enviar para o HD do servidor) */
+	$noticia->upload($imagem);
+	$noticia->setImagem($imagem['name']);
 	$noticia->usuario->setId($_SESSION['id']);
 
-	Utilitarios::dump($noticia);
+
+	Utilitarios::dump($imagem);
 	/* $noticia->inserir(); */
 /* 	header('location:noticias.php'); */
 }
@@ -34,7 +40,7 @@ if(isset($_POST['inserir'])){
 		Inserir nova notícia
 		</h2>
 				
-		<form class="mx-auto w-75" action="" method="post" id="form-inserir" name="form-inserir">
+		<form enctype="multipart/form-data" class="mx-auto w-75" action="" method="post" id="form-inserir" name="form-inserir">
 
             <div class="mb-3">
                 <label class="form-label" for="categoria">Categoria:</label>

@@ -47,7 +47,22 @@ final class Noticia{
             die("Erro:". $erro->getMessage());
         }
     }
-
+    public function upload(array $arquivo){
+        /* Definindo os formatos aceitos*/
+        $tiposValidos = [
+            "image/png",
+            "image/jpeg",
+            "image/gif",
+            "image/svg+xml"
+        ];
+        if(!in_array($arquivo['type'], $tiposValidos)){
+            die("<script>
+            alert('Formato inválido!');
+            history.back();
+            </script>"
+            );
+        }
+    }
 
 
 
