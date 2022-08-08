@@ -8,5 +8,8 @@ abstract class Utilitarios {
         var_dump($dados);
         echo "</pre>";
     }
+    public static function data($dados){
+   return date('d/m/Y H:i', strtotime($dados));
+    }
 
 }

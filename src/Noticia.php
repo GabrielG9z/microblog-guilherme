@@ -77,14 +77,18 @@ final class Noticia{
     }
     public function listar():array{
        if($this->usuario->getTipo() === 'admin' ){
-        $sql = "SELECT id, data, titulo, texto, resumo, imagem , destaque, usuario_id, categoria_id FROM noticias ";
+        $sql = "SELECT noticias.id, noticias.data, noticias.titulo ,noticias.destaque, usuarios.nome AS autor FROM noticias LEFT JOIN usuarios ON noticias.usuario_id = usuarios.id  ORDER BY data DESC";
         }else{
-        $sql = "SELECT id, data, titulo, texto, resumo, imagem , destaque, usuario_id, categoria_id FROM noticias ";
+            $sql = "SELECT id, data, titulo , destaque FROM noticias
+            WHERE usuario_id = :usuario_id ORDER BY data DESC";
         }
 
 
         try{
             $consulta = $this->conexao->prepare($sql);
+            if($this->usuario->getTipo()!=='admin'){
+            $consulta->bindValue(":usuario_id",$this->usuario->getId(), PDO::PARAM_INT);
+            }
             $consulta->execute();
             $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
         }catch(Exception $erro){
