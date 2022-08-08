@@ -44,10 +44,10 @@ $listarNoticias = $noticia->listar();
 					<tr>
                         <td><?=$noticia['titulo']?></td>
                         <td><?=Utilitarios::data($noticia['data'])?></td>
-
+	<!--  ?? Operador de Coelescencia Nula: Na prática, o valor a esquerda é exibido (desde que ele exista ), caso contrario o valor a direita é exibido -->
 						<?php 
 						if($_SESSION['tipo'] === 'admin'){ ?>
-							<td><?= $noticia['autor']? $noticia['autor'] : "Equipe Microblog";?></td>
+							<td><?= $noticia['autor']?? "Equipe Microblog"?></td>
 						<?php } ?>
 
                         <td><?=$noticia['destaque']?></td>                        
