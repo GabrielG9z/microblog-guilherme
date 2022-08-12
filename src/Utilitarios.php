@@ -9,7 +9,7 @@ abstract class Utilitarios {
         echo "</pre>";
     }
     public static function data($dados){
-   return date('d/m/Y H:i', strtotime($dados));
+     return date('d/m/Y H:i', strtotime($dados));
     }
 
 }
