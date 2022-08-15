@@ -12,4 +12,8 @@ abstract class Utilitarios {
      return date('d/m/Y H:i', strtotime($dados));
     }
 
+    public static function formataTexto($dados){
+     return nl2br($dados);
+    }
+
 }

@@ -161,6 +161,45 @@ final class Noticia{
             die("Erro: " .$erro->getMessage());
         }
     }
+        /* médotos para área pública */
+    public function listarDestaque():array{
+        $sql = "SELECT titulo, imagem, resumo, id FROM noticias WHERE destaque = :destaque ORDER BY data DESC";
+
+        try {
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->bindParam(":destaque",$this->destaque, PDO::PARAM_STR);
+            $consulta->execute();
+            $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $erro) {
+            die("Erro: " .$erro->getMessage());
+        }
+        return $resultado;
+    } 
+    public function listarTodos():array{
+        $sql = "SELECT data, titulo, resumo, id FROM noticias ORDER BY data DESC";
+
+        try {
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->execute();
+            $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $erro) {
+            die("Erro: " .$erro->getMessage());
+        }
+        return $resultado;
+    } 
+    public function listarUmaNoticia():array{
+        $sql = "SELECT noticias.id, noticias.data, noticias.titulo, noticias.imagem, noticias.texto, noticias.usuario_id, usuarios.nome AS autor FROM noticias LEFT JOIN usuarios ON noticias.usuario_id = usuarios.id WHERE noticias.id = :id";
+
+        try {
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->bindParam(":id", $this->id, PDO::PARAM_INT);
+            $consulta->execute();
+            $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
+        } catch (Exception $erro) {
+            die("Erro: " .$erro->getMessage());
+        }
+        return $resultado;
+    } 
 
 
 

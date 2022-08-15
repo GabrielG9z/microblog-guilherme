@@ -37,7 +37,9 @@ require_once "inc/cabecalho.php";
         </article>
     </div>
 
-</div>        
+</div> 
+
+<?php include_once "inc/todas.php";?>      
         
         
     
