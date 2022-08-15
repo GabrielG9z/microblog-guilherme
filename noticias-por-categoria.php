@@ -1,5 +1,13 @@
-<?php 
+<?php
+
+use Microblog\Noticia;
+use Microblog\Utilitarios;
+
 require_once "inc/cabecalho.php";
+$noticia = new Noticia;
+$noticia->setCategoriaId($_GET['id']);
+$buscaNoticia = $noticia->listarPorCategoria();
+
 ?>
 
 
@@ -11,21 +19,13 @@ require_once "inc/cabecalho.php";
         <div class="row my-1">
             <div class="col-12 px-md-1">
                 <div class="list-group">
-                    <a href="noticia.php" class="list-group-item list-group-item-action">
-                        <h3 class="fs-6">Título da notícia</h3>
-                        <p><time>12/12/2012</time> - Autor da notícia</p>
-                        <p>Resumo da notícia</p>
+                    <?php foreach($buscaNoticia as $noticia){?>
+                    <a href="noticia.php?categoria=<?=$noticia['nome']?>" class="list-group-item list-group-item-action">
+                        <h3 class="fs-6"><?=$noticia['titulo']?></h3>
+                        <p><time><?=Utilitarios::data($noticia['data'])?></time> - <?=$noticia['autor']?></p>
+                        <p><?=$noticia['resumo']?></p>
                     </a>
-                    <a href="noticia.php" class="list-group-item list-group-item-action">
-                        <h3 class="fs-6">Título da notícia</h3>
-                        <p><time>12/12/2012</time> - Autor da notícia</p>
-                        <p>Resumo da notícia</p>
-                    </a>
-                    <a href="noticia.php" class="list-group-item list-group-item-action">
-                        <h3 class="fs-6">Título da notícia</h3>
-                        <p><time>12/12/2012</time> - Autor da notícia</p>
-                        <p>Resumo da notícia</p>
-                    </a>
+                    <?php } ?>
                     
                 </div>
             </div>
