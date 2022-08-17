@@ -1,5 +1,7 @@
 <?php
-
+/* Inicialização do Output Buffer
+gerenciamento da memória de saídas/redirecionamentos */
+ob_start();
 use Microblog\Categoria;
 use Microblog\Noticia;
 
