@@ -1,13 +1,15 @@
 <?php
 
-use Microblog\Noticia;
+
 use Microblog\Utilitarios;
 
 require_once "inc/cabecalho.php";
 
-$noticia = new Noticia;
+
 $noticia->setId($_GET['id']);
 $umaNoticia = $noticia->listarUmaNoticia();
+
+
 
 
 ?>
@@ -26,7 +28,7 @@ $umaNoticia = $noticia->listarUmaNoticia();
     
 
 </div>        
-        
+         
           
 <?php include_once "inc/todas.php";?> 
 

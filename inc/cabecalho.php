@@ -1,8 +1,10 @@
 <?php
 
 use Microblog\Categoria;
+use Microblog\Noticia;
 
 require_once "vendor/autoload.php";
+$noticia  = new Noticia;
 $categoria = new Categoria;
 $listaDeCategorias = $categoria->ListarCategorias();
 ?>

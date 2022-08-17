@@ -201,7 +201,7 @@ final class Noticia{
         return $resultado;
     } 
     public function listarPorCategoria():array{
-        $sql = "SELECT noticias.id, noticias.data,noticias.titulo, noticias.resumo,  noticias.usuario_id, noticias.categoria_id, usuarios.nome AS autor, categorias.id, categorias.nome FROM noticias INNER JOIN usuarios ON noticias.usuario_id = usuarios.id INNER JOIN categorias ON noticias.categoria_id = categorias.id WHERE categorias.id = :categoria_id";
+        $sql = "SELECT noticias.id AS nid , noticias.data,noticias.titulo, noticias.resumo,  noticias.usuario_id, noticias.categoria_id, usuarios.nome AS autor, categorias.id, categorias.nome FROM noticias INNER JOIN usuarios ON noticias.usuario_id = usuarios.id INNER JOIN categorias ON noticias.categoria_id = categorias.id WHERE categorias.id = :categoria_id";
 
         try {
             $consulta = $this->conexao->prepare($sql);
