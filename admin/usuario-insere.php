@@ -1,21 +1,16 @@
 <?php
-
 use Microblog\ControleDeAcesso;
 use Microblog\Usuario;
 require_once "../inc/cabecalho-admin.php";
-
 $verifica = new ControleDeAcesso;
 $verifica->verificaAcessoAdmin();
-
 if(isset($_POST['inserir'])){
 	$usuario = new Usuario;
 	$usuario->setNome($_POST['nome']);
 	$usuario->setEmail($_POST['email']);
 	$usuario->setTipo($_POST['tipo']);
-
 	$usuario->setSenha($usuario->codificaSenha($_POST['senha']));
 	echo $usuario->getSenha();
-
 	$usuario->inserir();
 	header("location:usuarios.php");
 }

@@ -1,9 +1,7 @@
 <?php
-
 use Microblog\Categoria;
 use Microblog\Noticia;
 use Microblog\Utilitarios;
-
 require_once "../inc/cabecalho-admin.php";
 $categorias = new Categoria;
 $listarCategorias = $categorias->ListarCategorias();
@@ -12,7 +10,6 @@ $noticia->setId($_GET['id']);
 $noticia->usuario->setId($_SESSION['id']);
 $noticia->usuario->setTipo($_SESSION['tipo']);
 $dados = $noticia->listarUm();
-
 if(isset($_POST['atualizar'])){
 	$noticia->usuario->setId($_SESSION['id']);
 	$noticia->setTitulo($_POST['titulo']);
@@ -20,22 +17,15 @@ if(isset($_POST['atualizar'])){
 	$noticia->setResumo($_POST['resumo']);
 	$noticia->setDestaque($_POST['destaque']);
 	$noticia->setCategoriaId($_POST['categoria']);
-	
     if(empty($_FILES['imagem']['name'])){
-        $noticia->setImagem($_POST['imagem-existente']);
-        
+        $noticia->setImagem($_POST['imagem-existente']);    
 	}else{
         $noticia->upload($_FILES["imagem"]);
         $noticia->setImagem($_FILES['imagem']["name"]);
     };
-
     $noticia->atualizar();
 	header('location:noticias.php');
-
 }
-
-
-
 ?>
 
 

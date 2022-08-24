@@ -2,14 +2,11 @@
 use Microblog\ControleDeAcesso;
 use Microblog\Categoria;
 use Microblog\Utilitarios;
-
 require_once "../inc/cabecalho-admin.php";
 $verifica = new ControleDeAcesso;
 $verifica->verificaAcessoAdmin();
-
 $categoria = new Categoria;
 $listarCategorias = $categoria->ListarCategorias();
-
 ?>
 
 

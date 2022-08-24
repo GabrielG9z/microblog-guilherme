@@ -1,6 +1,5 @@
 <?php
 require_once "../inc/cabecalho-admin.php";
-
 if(isset($_GET['perfil-atualizado'])){
 	$feedback = "Dados atualizado com sucesso!";
 }

@@ -1,12 +1,8 @@
 <?php
-
 use Microblog\Categoria;
 use Microblog\Noticia;
 use Microblog\Utilitarios;
-
 require_once "../inc/cabecalho-admin.php";
-
-
 $categorias = new Categoria;
 $listarCategorias = $categorias->ListarCategorias();
 if(isset($_POST['inserir'])){
@@ -17,19 +13,15 @@ if(isset($_POST['inserir'])){
 	$noticia->setResumo($_POST['resumo']);
 	$noticia->setDestaque($_POST['destaque']);
 	$noticia->setCategoriaId($_POST['categoria']);
-	
 	/* Enviamos para o setter somente a parte que se refere ao nome/extensão do arquivo */
 	$imagem = $_FILES["imagem"];
 	/* Função upload (responsável por pegar o arquivo e enviar para o HD do servidor) */
 	$noticia->upload($imagem);
 	$noticia->setImagem($imagem['name']);
-	
+
 	$noticia->inserir();
 	header('location:noticias.php');
-
-
 }
-
 ?>
 
 

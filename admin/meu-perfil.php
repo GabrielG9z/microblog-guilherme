@@ -1,32 +1,23 @@
 <?php
-
 use Microblog\Usuario;
-
 require_once "../inc/cabecalho-admin.php";
 $usuario = new Usuario;
 $usuario->setId($_SESSION['id']);
 $dados = $usuario->listarUm();
-
-
 if (isset($_POST['atualizar'])){
 	$usuario->setNome($_POST['nome']);
 	$_SESSION['nome'] = $usuario->getNome();
 	$usuario->setEmail($_POST['email']);
 	$_SESSION['email'] = $usuario->getEmail();
 	$usuario->setTipo($_SESSION['tipo']);
-
-
 	if(empty($_POST['senha'])){
 		$usuario->setSenha($dados['senha']);
 	}else{
-
 		$usuario->setSenha($usuario->verificaSenha($_POST['senha'], $dados['senha']));
 	}
-
 	$usuario->atualizar();
 	header("location:index.php?perfil-atualizado"); 
 }
-
 ?>
 
 

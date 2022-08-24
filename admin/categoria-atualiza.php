@@ -1,24 +1,17 @@
 <?php
-
 use Microblog\Categoria;
 use Microblog\ControleDeAcesso;
-
-
 require_once "../inc/cabecalho-admin.php";
 $verifica = new ControleDeAcesso;
 $verifica->verificaAcessoAdmin();
-
 $categoria = new Categoria;
 $categoria->setId($_GET['id']);
 $dados = $categoria->ListarUmaCategoria();
-
 if (isset($_POST['atualizar'])){
 	$categoria->setNome($_POST['nome']);
-
 	$categoria->atualizarCategoria();
 	header("location:categorias.php");
 }
-
 ?>
 
 

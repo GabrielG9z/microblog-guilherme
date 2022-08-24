@@ -1,5 +1,4 @@
 <?php
-
 use Microblog\Categoria;
 use Microblog\ControleDeAcesso;
 require "../vendor/autoload.php";
@@ -10,3 +9,4 @@ $categoria = new Categoria;
 $categoria->setId($_GET['id']);
 $categoria->excluirCategoria();
 header("location:categorias.php");
+?>

@@ -1,8 +1,6 @@
 <?php
-
 use Microblog\Noticia;
 use Microblog\Utilitarios;
-
 require_once "../inc/cabecalho-admin.php";
 $noticia = new Noticia;
 $noticia->usuario->setId($_SESSION['id']);
