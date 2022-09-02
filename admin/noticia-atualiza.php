@@ -18,8 +18,6 @@ if(isset($_POST['atualizar'])){
 	$noticia->setDestaque($_POST['destaque']);
 	$noticia->setCategoriaId($_POST['categoria']);
     if(empty($_FILES['imagem']['name'])){
-        $noticia->setImagem($_POST['imagem-existente']);    
-	}else{
         $noticia->upload($_FILES["imagem"]);
         $noticia->setImagem($_FILES['imagem']["name"]);
     };
